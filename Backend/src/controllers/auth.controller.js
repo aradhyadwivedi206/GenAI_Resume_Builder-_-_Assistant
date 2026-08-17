@@ -41,7 +41,12 @@ const token=jwt.sign(
     process.env.JWT_SECRET,
     {expiresIn:"1d"}
 )
-res.cookie("token",token)
+// res.cookie("token",token)
+res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none"
+});
 
 
 res.status(201).json({
@@ -81,7 +86,12 @@ async function loginUserController(req,res){
     process.env.JWT_SECRET,
     {expiresIn:"1d"}
 )
-res.cookie("token",token)
+// 
+res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none"
+});
 res.status(200).json({
     message:"user loggedin succssfully",
     user:{
